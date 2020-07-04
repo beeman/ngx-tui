@@ -1,98 +1,176 @@
-# NgxTui
+# ngx-tui
 
-This project was generated using [Nx](https://nx.dev).
+Angular 2+ plugin for tui-editor [tui-editor](https://github.com/nhnent/tui.editor)
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+> This project is forked from [tylernhoward/ngx-tui-editor](https://github.com/tylernhoward/ngx-tui-editor).
 
-🔎 **Nx is a set of Extensible Dev Tools for Monorepos.**
+## Installation
 
-## Quick Start & Documentation
+To install this library, run:
 
-[Nx Documentation](https://nx.dev/angular)
+```bash
+$ npm install ngx-tui --save
+```
 
-[10-minute video showing all Nx features](https://nx.dev/angular/getting-started/what-is-nx)
+## Setup
 
-[Interactive Tutorial](https://nx.dev/angular/tutorial/01-create-application)
+To install, simply run:
 
-## Adding capabilities to your workspace
+```bash
+$ npm install ngx-tui
+```
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+and then from your `AppModule`:
 
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-Below are our core plugins:
+import { AppComponent } from './app.component';
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+// Import
+import { TuiModule } from 'ngx-tui';
 
-There are also many [community plugins](https://nx.dev/nx-community) you could add.
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
 
-## Generate an application
+    // Specify import
+    TuiModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+Use in the template like so:
 
-> You can use any of the plugins above to generate applications as well.
+```xml
+<!-- You can now use the editor in any component -->
+<h1>
+  {{title}}
+</h1>
+<tui-editor [options] = "options" ></tui-editor>
+```
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+You may pass options to the component in the following format (where `TuiEditorOptions` is imported from `ngx-tui`)
 
-## Generate a library
+```typescript
+options: TuiEditorOptions = {
+  initialValue: `# Title of Project`,
+  initialEditType: 'markdown',
+  previewStyle: 'vertical',
+  height: 'auto',
+  minHeight: '500px',
+};
+```
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+If you wish to interact with more features of the plugin:
 
-> You can also use any of the plugins above to generate libraries as well.
+Inject the service in the component that you wish to use the editor.
 
-Libraries are sharable across libraries and applications. They can be imported from `@ngx-tui/mylib`.
+```typescript
+import { TuiService } from 'ngx-tui';
+import { Component } from '@angular/core';
 
-## Development server
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  constructor(private editorService: TuiService) {}
+  setHtml() {
+    this.editorService.setHtml('<h1>Hello World</h1>');
+  }
+}
+```
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+#### Service Functions
 
-## Code scaffolding
+The following functions can be called on the TuiService:
 
-Run `ng g component my-component --project=my-app` to generate a new component.
+| Function                                     | Use                                                              | Returns |
+| -------------------------------------------- | ---------------------------------------------------------------- | ------- |
+| getMarkdown(editorId?: string)               | Gets markdown syntax text from editor                            | string  |
+| getHtml(editorId?: string)                   | Gets html syntax text from editor                                | string  |
+| getSelectedText(editorId?: string)           | Gets only selected text from editor                              | string  |
+| insertText(text: string, editorId?: string)  | Inserts plain text into editor                                   | void    |
+| setHtml(text: string, editorId?: string)     | Inserts html text and formats into markdown in editor            | void    |
+| setMarkdown(text: string, editorId?: string) | Inserts markdown text and formats into markdown syntax in editor | void    |
+| hide(editorId?: string)                      | Hides the editor pane                                            | void    |
+| show(editorId?: string)                      | Shows the editor pane                                            | void    |
 
-## Build
+#### Component Outputs
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+| Attribute          | Required | Type                                             | Default | Description                                                                                                    |
+| ------------------ | -------- | ------------------------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------- |
+| `loaded`           | No       | `void`                                           |         | This event will fire when the editor has loaded                                                                |
+| `onChangeMarkdown` | No       | `string`                                         |         | This event will be fired when you done typing and will return the markdown string                              |
+| `onChangeHTML`     | No       | `string`                                         |         | This event will be fired when you are typing and will return the rendered html string                          |
+| `onChange`         | No       | `MarkdownData: {html: string, markdown: string}` |         | This event will be fired when you are typing and will return both the html and markdown from the editor        |
+| `onBlurMarkdown`   | No       | `string`                                         |         | This event will be fired when the editor is blurred and will return the markdown string                        |
+| `onBlurHTML`       | No       | `string`                                         |         | This event will be fired when the editor is blurred and will return the rendered html string                   |
+| `onBlur`           | No       | `string`                                         |         | This event will be fired when the editor is blurred and will return both the html and markdown from the editor |
 
-## Running unit tests
+**Example**
 
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+```html
+<tui-editor
+  [options]="options"
+  (loaded)="editorLoaded()"
+  (onChange)="onChange($event)"
+  (onBlur)="onBlur($event)"
+></tui-editor>
+```
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+## Setup with Multiple Instances
 
-## Running end-to-end tests
+You can track the editorService instance by passing in an `editorId` in the options object. When you need to use any of the functions in the `TuiService` you will use the optional `editorId` you passed in with the options input.
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+### Example
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+Setting the editor id in the options
 
-## Understand your workspace
+```typescript
+options : {
+            ...
+            editorId: 'MyEditorId',
+            ...
+          },
+```
 
-Run `nx dep-graph` to see a diagram of the dependencies of your projects.
+Passing the editorId into the service call
 
-## Further help
+```typescript
+import { TuiService } from 'ngx-tui';
+import { Component } from '@angular/core';
 
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  constructor(private editorService: TuiService) {}
+  setHtml() {
+    this.editorService.setHtml('<h1>Hello World</h1>', 'MyEditorId');
+  }
+}
+```
 
-## ☁ Nx Cloud
+## Development
 
-### Computation Memoization in the Cloud
+To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
+```bash
+$ npm run build
+```
 
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
+## License
 
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
+MIT © [Bram Borggreve](https://github.com/beeman)
 
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Original work by [Tyler Howard](mailto:tylernhoward@gmail.com)

@@ -1,9 +1,15 @@
 {
-  "name": "ngx-tui",
-  "version": "0.0.1",
+  "name": "@ngx-tui/tui",
+  "version": "1.0.0",
+  "nxpm": {
+    "allowPackageName": true
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.0",
-    "@angular/core": "^9.1.0",
-    "tslib": "^1.10.0"
-  }
+    "@angular/core": "^9.1.0"
+  },
+  "license": "MIT"
 }
