@@ -39,6 +39,10 @@
     "@angular/router": "^9.1.0",
     "@kikstart-ui/themes": "^2.2.0",
     "@toast-ui/editor": "^2.2.0",
+    "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
+    "codemirror-graphql": "^0.12.0",
+    "graphql": "^15.2.0",
+    "highlightjs-graphql": "^1.0.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "^0.10.2"

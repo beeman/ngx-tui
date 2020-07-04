@@ -1,6 +1,31 @@
 import { Injectable } from '@angular/core';
 import Editor from '@toast-ui/editor';
 
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+
+import hljs from 'highlight.js/lib/highlight';
+
+import javascript from 'highlight.js/lib/languages/javascript';
+import json from 'highlight.js/lib/languages/json';
+import markdown from 'highlight.js/lib/languages/markdown';
+import scss from 'highlight.js/lib/languages/scss';
+import typescript from 'highlight.js/lib/languages/typescript';
+import xml from 'highlight.js/lib/languages/xml';
+
+import { highlightjsGraphql } from './highlightjs.graphql';
+
+hljs.registerLanguage('graphql', highlightjsGraphql);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('json', json);
+hljs.registerLanguage('markdown', markdown);
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('scss', scss);
+hljs.registerLanguage('xml', xml);
+
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/markdown/markdown';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+
 @Injectable()
 export class TuiService {
   editor: any = {};
@@ -16,7 +41,7 @@ export class TuiService {
           previewStyle: 'vertical',
           height: '300px',
         },
-        options
+        { ...options, plugins: [[codeSyntaxHighlight, { hljs }]] }
       )
     );
 
