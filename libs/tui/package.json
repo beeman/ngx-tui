@@ -1,5 +1,5 @@
 {
-  "name": "@ngx-tui/tui",
+  "name": "ngx-tui",
   "version": "1.0.0",
   "nxpm": {
     "allowPackageName": true
