@@ -20,7 +20,7 @@ To install, simply run:
 $ npm install ngx-tui
 ```
 
-and then from your `AppModule`:
+Next, use it in your `AppModule`:
 
 ```typescript
 import { BrowserModule } from '@angular/platform-browser';
@@ -45,7 +45,16 @@ import { TuiModule } from 'ngx-tui';
 export class AppModule {}
 ```
 
-Use in the template like so:
+Make sure to import the styles and any styles for syntax highlighting:
+
+```scss
+@import '~@toast-ui/editor/dist/toastui-editor.css';
+/** optional */
+@import '~codemirror/lib/codemirror.css';
+@import '~highlight.js/styles/github.css';
+```
+
+Use it in your templates like this:
 
 ```xml
 <!-- You can now use the editor in any component -->
@@ -159,14 +168,6 @@ export class AppComponent {
     this.editorService.setHtml('<h1>Hello World</h1>', 'MyEditorId');
   }
 }
-```
-
-## Development
-
-To generate all `*.js`, `*.d.ts` and `*.metadata.json` files:
-
-```bash
-$ npm run build
 ```
 
 ## License

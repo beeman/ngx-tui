@@ -39,7 +39,6 @@ export interface TuiEditorOptions {
 @Component({
   selector: 'tui-editor',
   encapsulation: ViewEncapsulation.None,
-  styleUrls: ['./tui-editor.component.scss'],
   template: '<div #editor class = "ngx-tui-editor"></div>',
 })
 export class TuiComponent implements AfterViewInit {
