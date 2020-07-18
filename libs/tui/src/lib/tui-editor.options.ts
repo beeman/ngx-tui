@@ -1,21 +1,22 @@
 export interface TuiEditorOptions {
-  previewStyle?: 'tab' | 'vertical';
-  previewHighlight?: boolean;
-  initialEditType?: 'markdown' | 'wysiwyg';
-  initialValue?: string;
-  height?: string;
-  minHeight?: string;
-  editorId?: string;
-  language?: string;
-  useDefaultHTMLSanitizer?: boolean;
-  useCommandShortcut?: boolean;
-  usageStatistics?: boolean;
-  toolbarItems?: string[];
-  hideModeSwitch?: boolean;
-  linkAttribute?: any;
-  extendedAutolinks?: boolean;
   customConvertor?: any;
   customHTMLRenderer?: any;
-  referenceDefinition?: boolean;
   customHTMLSanitizer?: (params: any) => any;
+  editorId?: string;
+  extendedAutolinks?: boolean;
+  height?: string;
+  hideModeSwitch?: boolean;
+  initialEditType?: 'markdown' | 'wysiwyg';
+  initialValue?: string;
+  language?: string;
+  linkAttribute?: any;
+  minHeight?: string;
+  placeholder?: string;
+  previewHighlight?: boolean;
+  previewStyle?: 'tab' | 'vertical';
+  referenceDefinition?: boolean;
+  toolbarItems?: string[];
+  usageStatistics?: boolean;
+  useCommandShortcut?: boolean;
+  useDefaultHTMLSanitizer?: boolean;
 }

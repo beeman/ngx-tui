@@ -9,5 +9,6 @@ export class EmptyComponent {
     initialEditType: 'markdown',
     previewStyle: 'vertical',
     height: '100%',
+    placeholder: 'Enter your markdown here!',
   };
 }
