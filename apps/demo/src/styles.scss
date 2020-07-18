@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@kikstart-ui/themes/scss/light";
+html,
+body {
+  height: 100%;
+}
 @import '~@toast-ui/editor/dist/toastui-editor.css';
 /** optional */
 @import '~codemirror/lib/codemirror.css';

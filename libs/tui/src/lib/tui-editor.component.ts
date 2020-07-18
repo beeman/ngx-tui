@@ -8,32 +8,12 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { TuiEditorOptions } from './tui-editor.options';
 import { TuiService } from './tui-editor.service';
 
 export interface MarkdownData {
   html: string;
   markdown: string;
-}
-
-export interface TuiEditorOptions {
-  previewStyle?: 'tab' | 'vertical';
-  previewHighlight?: boolean;
-  initialEditType?: 'markdown' | 'wysiwyg';
-  initialValue?: string;
-  height?: string;
-  minHeight?: string;
-  language?: string;
-  useDefaultHTMLSanitizer?: boolean;
-  useCommandShortcut?: boolean;
-  usageStatistics?: boolean;
-  toolbarItems?: string[];
-  hideModeSwitch?: boolean;
-  linkAttribute?: any;
-  extendedAutolinks?: boolean;
-  customConvertor?: any;
-  customHTMLRenderer?: any;
-  referenceDefinition?: boolean;
-  customHTMLSanitizer?: (params: any) => any;
 }
 
 @Component({
@@ -83,24 +63,20 @@ export class TuiComponent implements AfterViewInit {
   }
 
   changed() {
-    this.onChangeMarkdown.emit(
-      this.editor.getMarkdown((this.options as any).editorId)
-    );
-    this.onChangeHTML.emit(this.editor.getHtml((this.options as any).editorId));
+    this.onChangeMarkdown.emit(this.editor.getMarkdown(this.options.editorId));
+    this.onChangeHTML.emit(this.editor.getHtml(this.options.editorId));
     this.onChange.emit({
-      html: this.editor.getHtml((this.options as any).editorId),
-      markdown: this.editor.getMarkdown((this.options as any).editorId),
+      html: this.editor.getHtml(this.options.editorId),
+      markdown: this.editor.getMarkdown(this.options.editorId),
     });
   }
 
   blur() {
-    this.onBlurMarkdown.emit(
-      this.editor.getMarkdown((this.options as any).editorId)
-    );
-    this.onBlurHTML.emit(this.editor.getHtml((this.options as any).editorId));
+    this.onBlurMarkdown.emit(this.editor.getMarkdown(this.options.editorId));
+    this.onBlurHTML.emit(this.editor.getHtml(this.options.editorId));
     this.onBlur.emit({
-      html: this.editor.getHtml((this.options as any).editorId),
-      markdown: this.editor.getMarkdown((this.options as any).editorId),
+      html: this.editor.getHtml(this.options.editorId),
+      markdown: this.editor.getMarkdown(this.options.editorId),
     });
   }
 }
