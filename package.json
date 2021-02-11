@@ -44,7 +44,7 @@
     "graphql": "^15.2.0",
     "highlightjs-graphql": "^1.0.1",
     "rxjs": "~6.5.4",
-    "tslib": "^2.1.0",
+    "tslib": "^2.0.0",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
@@ -65,7 +65,7 @@
     "eslint": "6.8.0",
     "jest": "25.2.3",
     "jest-preset-angular": "8.1.2",
-    "ng-packagr": "^10.1.2",
+    "ng-packagr": "^10.1.0",
     "prettier": "2.0.4",
     "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
