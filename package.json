@@ -2,6 +2,7 @@
   "name": "ngx-tui",
   "version": "2.0.0",
   "license": "MIT",
+  "files": ["dist/libs/tui"],
   "scripts": {
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",

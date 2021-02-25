@@ -48,7 +48,7 @@ export class TuiComponent implements AfterViewInit {
   @Input() options: TuiEditorOptions;
   editor: any;
   events = {
-    change: this.loadedEditor.bind(this),
+    change: this.changed.bind(this),
     load: this.loadedEditor.bind(this),
     blur: this.blur.bind(this),
   };
