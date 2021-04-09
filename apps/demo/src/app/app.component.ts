@@ -38,7 +38,9 @@ import { TuiEditorOptions, TuiService } from 'ngx-tui';
         </div>
       </div>
       <div class="flex-grow-1">
-        <tui-editor [options]="options"></tui-editor>
+        <tui-editor
+        (onChange)="log($event)"
+         [options]="options"></tui-editor>
       </div>
     </div>
   `,
@@ -116,5 +118,9 @@ const key: string = 'value';
 
   public setPreviewStyleVertical() {
     this.service.changePreviewStyle('vertical');
+  }
+  public log(e){
+    console.log(e);
+    
   }
 }
